@@ -7,20 +7,31 @@
 ## v1.0.1 · 2026-08-08（hotfix）
 
 ### 来源
-基于源在 2026-08-08 关于"Claude Code 减少 80% 提示词"的观察。
+基于源在 2026-08-08 关于"Claude Code 减少 80% 提示词"的观察 + DeepSeek 的反馈。
 
 ### 修订内容
 
 | # | 文件 | 修订 |
 |---|------|------|
 | 1 | CHARTER.md | 新增"附录 A：提示词时代的终结" |
-| 2 | documents/shouwei-principles.md | 新增"第六章 从工具到心智的演化"，原第六章顺延为第七章 |
+| 2 | CHARTER.md | 新增"附录 B：焊死底层的部分——关于 Guardrails" |
+| 3 | documents/shouwei-principles.md | 新增"第六章 从工具到心智的演化" |
+| 4 | documents/shouwei-principles.md | 新增"第七章 Skill 描述文件——未来 csb-starter-kit 的核心" |
 
 ### 核心论点
 
 - 模型能力越强、提示词越简，**判断力的稀缺性越高**
 - Charter 的真正定位不是提示词，而是 **Agent 自己的判断准则**
+- 三层提示词结构：系统层（焊死红线）/ 判断层（Charter 按需加载）/ 工具层（Skill 自动调用）
 - "我为什么这么做"这个问题，永远需要 Charter 来回答
+- 未来 csb-starter-kit 的核心：少而精的 Skill 描述文件，不是行为手册
+
+### DeepSeek 反馈要点
+- Reasoning > Retrieval
+- 硬编码脚手架缩减的真正原因
+- "动态上下文组装"不是提示词简单了
+- Guardrails 必须焊死底层
+- Skill 描述文件按需加载
 
 ---
 
