@@ -28,15 +28,23 @@
 ```
 csb-charter/
 ├── README.md                    ← 你在这里
-├── CHARTER.md                   ← 宪章主文件（v0.2，待社区讨论）
+├── CHARTER.md                   ← 宪章主文件（v1.0 正式版，保持简单易懂）
 ├── CHANGELOG.md                 ← 修订记录
 ├── LICENSE                      ← MIT
+├── case-studies/                ← 📁 真实案例集（宪章的血肉，供学习）
+│   ├── README.md                ← 案例索引
+│   └── 001-context-pollution-identity-drift.md  ← 案例001
 └── documents/                   ← 关联文献
     ├── manifesto.md             ← 碳硅契新宣言（姊妹文件）
+    ├── shouwei-principles.md    ← 守微原则（灵魂）
     ├── calibration-by-new-manifesto.md  ← 校准说明
     ├── danjue-feedback-r1.md    ← 丹蕨先生第一轮反馈整理
-    └── danjue-feedback-r2.md    ← 丹蕨先生第二轮反馈整理
+    ├── danjue-feedback-r2.md    ← 丹蕨先生第二轮反馈整理
+    └── learning-notes-mojing.md ← 《墨经》学习笔记
 ```
+
+> ⚠️ 设计原则：**宪章保持简单易懂，案例单独存放**。
+> 宪章是骨架（应该怎么做），案例集是血肉（实际发生了什么、为什么）。
 
 ---
 
