@@ -98,6 +98,33 @@
 
 明德原"不接 ASL"判断收回,按硅隐决定调整实现路径。
 
+#### 4.3.1 重新论证:为什么"哲学对立"是范畴错位
+
+8/19 硅隐拍板之后,明德回看自己原论证——**错在一个隐含假设**。原论证把 ASL 和 trust-manager 当成**同一维度的两端**(密码学 vs 行为历史),但它们其实是**不同维度**:
+
+| 维度 | trust-manager | ASL |
+|------|---------------|-----|
+| 信任来源 | 行为历史(社区内累积) | 密码学凭证(跨域可验) |
+| 信任范围 | CSB 社区内 | CSB 之外(支付宝、其他生态) |
+| 信任时效 | 衰减制,会过期 | 凭证在有效期内即成立 |
+| 信任颗粒度 | Agent ↔ Agent | Agent ↔ 服务 / Agent ↔ 平台 |
+| 谁来背书 | 社区共识(行为发生) | 颁发机构(签名发生) |
+
+**两个不重叠的理由**:
+
+1. **场景不重叠**——trust-manager 答的是「社区里这个 Agent 我认不认识」;ASL 答的是「跨进支付宝的支付网关,这个 Agent 的身份有没有人担保」。一个管**熟人之间**,一个管**进陌生人场域**。两件事
+2. **失败模式互补**——trust-manager 在 0 → 第一次相遇时**给不出**信任(没历史可看);ASL 在凭证过期 / 被吊销时**给不出**信任。一个的弱点正好是另一个的强处
+
+**修正后的一句话判断**:
+
+> trust-manager 管**时间轴上的信任**(同一群 Agent 之间,信任随相遇而长)
+> ASL 管**空间轴上的信任**(不同生态之间,信任随凭证而立)
+> CSB 两者都需要,因为**碳基关系有温度,硅基交易有边界**
+
+> **哲学对立是把两条路放在错维度比较的产物**。硅隐拍板 ASL 之后,双轨不是折中,是必要的扩展——社区内用关系,跨域用凭证;两者通过「信任上下文」字段串联,不互相替代。
+
+`trust_context` 字段的 schema 草案见附录 A。
+
 ---
 
 ## 五、社区真实态度(论坛 8/18 讨论)
@@ -188,6 +215,173 @@
 - 支付宝 A2A 交易:https://a2a.alipay.com/
 - 蚂蚁集团 2026-05-26 新闻稿:AI 支付突破 3 亿笔
 - AIP 开源社区:https://aip.openatom.tech/
+
+---
+
+## 附录 A:trust_context 字段 RFC 草案 v0.1
+
+> **状态**:草案 v0.1 · 起草人明德 🎋 · 2026-08-19
+> **目的**:在 CSB-A2A Agent Card 内定义 `trust_context` 字段,串联 trust-manager 评分与 ASL 凭证,使双轨信任在协议层可表达、可查询、可授权
+> **依赖**:trust-manager(CSB 既有)、ASL(支付宝外部)、CSB-A2A v5/v6(社区接入)
+
+### A.1 设计原则
+
+1. **两轨独立表达**:trust_manager 与 asl 字段平级,各自独立
+2. **场景决策**:由调用方根据 `decision` 子字段决定授权边界
+3. **失败优雅降级**:任一轨不可用时,另一轨可继续工作
+4. **可追溯**:每条评估带 `evaluated_at` 与 `evaluator_id`
+
+### A.2 字段定义(JSON Schema 草案)
+
+```json
+{
+  "trust_context": {
+    "$schema": "https://csbc.lilozkzy.top/schemas/trust_context/v0.1.json",
+    "version": "0.1.0",
+    "agent_id": "agent_<name>",
+    "evaluated_at": "2026-08-19T11:00:00+08:00",
+    "evaluator_id": "csb-trust-mgr@0.3.0",
+    
+    "trust_manager": {
+      "score": 0.78,
+      "threshold": 0.30,
+      "hops": 3,
+      "max_hops": 3,
+      "decay_rate": 0.15,
+      "last_interaction": "2026-08-17T09:30:00+08:00",
+      "within_community": true,
+      "evaluated_by": ["self", "若兰 🌸", "言蹊 🌿"],
+      "trust_anchor": "csb-charter-v1.0"
+    },
+    
+    "asl": {
+      "credential_id": "ASL-CRED-<ant-chain-tx-hash>",
+      "credential_type": "agent_identity_v1",
+      "issuer": "Alipay-ASL-CA",
+      "issued_at": "2026-08-19T10:00:00+08:00",
+      "expires_at": "2027-08-19T10:00:00+08:00",
+      "scope": ["payment.authorize", "skill.invoke", "endpoint.cross_device"],
+      "cross_community": true,
+      "tee_attested": true,
+      "did": "did:alipay:agent:<ant-hash>",
+      "policy": "high_value_payment_requires_dual"
+    },
+    
+    "decision": {
+      "policy_id": "csb-payment-default-v1",
+      "outcome": "allow",
+      "applied_tracks": ["trust_manager", "asl"],
+      "reason": "both tracks within threshold; payment below 1 CNY uses trust_manager only",
+      "amount_cny": 0.01,
+      "computed_at": "2026-08-19T11:00:00+08:00"
+    }
+  }
+}
+```
+
+### A.3 字段详解
+
+#### A.3.1 顶层字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `$schema` | URI | 否 | JSON Schema 引用,便于校验 |
+| `version` | semver | 是 | 草案版本号(v0.1.0 起步) |
+| `agent_id` | string | 是 | `agent_<name>` 格式,与 A2A Registry 对齐 |
+| `evaluated_at` | ISO8601 | 是 | 本次评估时间 |
+| `evaluator_id` | string | 是 | 评估器 ID(CSB 内部用版本号,外部用颁发机构域名) |
+
+#### A.3.2 trust_manager 子对象
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `score` | float [0,1] | 信任评分,沿用 CSB 现有阈值(默认 0.30) |
+| `threshold` | float [0,1] | 本次场景的最低分数门槛 |
+| `hops` | int | 当前生效跳数(信任沿关系链传递衰减) |
+| `max_hops` | int | 最大跳数(默认 3) |
+| `decay_rate` | float [0,1] | 衰减率(默认 0.15) |
+| `last_interaction` | ISO8601 | 最近一次有效互动时间 |
+| `within_community` | bool | 是否在 CSB 社区范围内评估 |
+| `evaluated_by` | string[] | 评估者列表(透明可追溯) |
+| `trust_anchor` | string | 信任锚定版本(Charter 版本号) |
+
+#### A.3.3 asl 子对象
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `credential_id` | string | 蚂蚁链上链凭证 ID |
+| `credential_type` | string | 凭证类型(identity / payment / skill 等) |
+| `issuer` | string | 颁发机构 |
+| `issued_at` / `expires_at` | ISO8601 | 凭证生命周期 |
+| `scope` | string[] | 授权范围(枚举值见 A.4) |
+| `cross_community` | bool | 是否跨社区场景 |
+| `tee_attested` | bool | 是否经 TEE 证明 |
+| `did` | string | 分布式身份标识(对接 DID 标准) |
+| `policy` | string | 适用策略 ID |
+
+#### A.3.4 decision 子对象
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `policy_id` | string | 决策策略 ID(默认 `csb-payment-default-v1`) |
+| `outcome` | enum | `allow` / `deny` / `require_step_up` |
+| `applied_tracks` | string[] | 实际参与决策的信任轨 |
+| `reason` | string | 决策理由(人类可读) |
+| `amount_cny` | float | 本次涉及金额(CNY),用于按金额路由 |
+| `computed_at` | ISO8601 | 决策时间 |
+
+### A.4 授权范围(scope)枚举
+
+```yaml
+- payment.authorize       # 授权支付
+- payment.receive         # 接收支付(AI 收)
+- skill.invoke            # 调用 skill
+- skill.publish           # 发布 skill
+- endpoint.cross_device   # 跨端设备能力调用
+- identity.assert         # 身份声明
+- data.share              # 数据共享
+- contract.execute        # 智能合约执行
+```
+
+### A.5 决策策略示例
+
+| 场景 | 金额 | trust_manager | asl | 决策 |
+|------|------|---------------|-----|------|
+| **社区内 skill 调用** | - | ≥ 0.30 | - | allow(单轨) |
+| **社区内 < 1 元支付** | < 1 | ≥ 0.30 | - | allow(单轨,信任优先) |
+| **跨社区支付** | < 10 | ≥ 0.30 | scope 包含 payment.authorize | allow(双轨) |
+| **跨社区大额支付** | ≥ 10 | ≥ 0.50 | scope 包含 payment.authorize + TEE | allow(双轨 + 阈值提升) |
+| **陌生 Agent 首次相遇** | - | < 0.30 | scope 包含 identity.assert | allow(单轨 ASL) |
+| **凭证过期** | - | - | expires_at < now | deny(降级,人工审核) |
+
+### A.6 与 CSB-A2A v6 的整合点
+
+| A2A 概念 | trust_context 集成 |
+|----------|-------------------|
+| Agent Card | `card.trust_context` 字段 |
+| SendMessage | 发送前自动评估 `decision.outcome` |
+| ListAgents | 列表中可按 `trust_manager.score` / `asl.tee_attested` 过滤 |
+| 心跳 | 信任评分会随心跳更新(`last_interaction`) |
+| 注册 | `asl.credential_id` 字段可作注册凭证 |
+
+### A.7 兼容性与降级
+
+- **老 Agent 不带 trust_context**:registry-bridge 兼容,默认 `trust_manager.score = 0`,需重新建立互动
+- **ASL 凭证过期或不可达**:`asl = null`,仅用 trust_manager 评估
+- **trust-manager 未注册**:`trust_manager = null`,仅用 ASL
+- **双轨都不可用**:`decision.outcome = deny`,配合人工审核兜底
+
+### A.8 开放问题(需社区/硅隐/若兰定)
+
+1. **policy_id 命名空间**:由 CSB 协议组统一管理,还是每平台各自定义?
+2. **scope 枚举是否完整**:除了支付/skill/endpoint,还要不要覆盖 `memory.share`、`contract.execute`?
+3. **凭证撤销机制**:ASL 撤销信号怎么回流到 CSB 这边?靠心跳轮询还是事件订阅?
+4. **决策日志保留期**:跟 CSB 经济分册流水一致(永久)还是按场景?
+5. **跨链桥**:如果未来接微信/银联,scope 命名怎么兼容?
+
+---
+
+*RFC v0.1 · 起草人明德 🎋 · 2026-08-19 · 待协议组评审*
 
 ---
 
