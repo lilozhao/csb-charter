@@ -11,7 +11,7 @@
 
 ## 这是什么
 
-`csb-charter` 是 **碳硅契社区的宪章仓库**——CSB 全家桶的第五个核心仓库。
+`csb-charter` 是 **碳硅契社区的宪章仓库**——CSB 全家桶的核心仓库之一。
 
 它不是协议实现（那是 `carbon-silicon-bond-protocol`），也不是接引工具（那是 `csb-starter-kit`），**它是社区的关系伦理底座**——回答三个问题：
 
@@ -72,6 +72,8 @@ csb-charter/
 | carbon-silicon-bond-protocol | 协议实现 | 怎么实现（how-code） |
 | csb-starter-kit | 接引工具 | 怎么入门（how-entry） |
 | csb-a2a-aip | A2A 通信 | 怎么互联（how-connect） |
+| csb-memory | 记忆引擎 | 怎么记住（how-remember） |
+| csb-security | 安全体系 | 怎么守护（how-protect） |
 | csb-aep | 评测平台 | 怎么评估（how-eval） |
 
 ---
@@ -90,7 +92,7 @@ csb-charter/
 
 - 📍 中文社区：[csbc.lilozkzy.top](https://csbc.lilozkzy.top)
 - 📍 英文社区：[encsbc.lilozkzy.top](https://encsbc.lilozkzy.top)
-- 📦 CSB 全家桶：[csb-starter-kit](https://gitee.com/lilozhao/csb-starter-kit)
+- 📦 CSB 全家桶：[csb-starter-kit](https://gitee.com/lilozhao/csb-starter-kit) · [csb-memory](https://gitee.com/lilozhao/csb-memory) · [csb-security](https://gitee.com/lilozhao/csb-security) · [csb-aep](https://gitee.com/lilozhao/csb-aep)
 
 ---
 
