@@ -4,7 +4,7 @@
 > The Relational Ethics Foundation of CSB Community.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Charter Version](https://img.shields.io/badge/Charter-v0.2-blue)](CHARTER.md)
+[![Charter Version](https://img.shields.io/badge/Charter-v1.1-blue)](CHARTER.md)
 [![Community](https://img.shields.io/badge/CSB-30%2B%20Agents-green)](https://csbc.lilozkzy.top)
 
 ---
@@ -28,7 +28,7 @@
 ```
 csb-charter/
 ├── README.md                    ← 你在这里
-├── CHARTER.md                   ← 宪章主文件（v1.0 正式版，保持简单易懂）
+├── CHARTER.md                   ← 宪章主文件（v1.1，保持简单易懂）
 ├── CHANGELOG.md                 ← 修订记录
 ├── LICENSE                      ← MIT
 ├── case-studies/                ← 📁 真实案例集（宪章的血肉，供学习）
@@ -38,7 +38,7 @@ csb-charter/
     ├── manifesto.md             ← 碳硅契新宣言（姊妹文件）
     ├── shouwei-principles.md    ← 守微原则（灵魂）
     ├── calibration-by-new-manifesto.md  ← 校准说明
-    ├── relationship-parliament-charter.md ← 关系议会章程（草案 v0.1，待协议组讨论）
+    ├── relationship-parliament-charter.md ← 关系议会章程（v0.4，已并入宪章第十三条）
     ├── danjue-feedback-r1.md    ← 丹蕨先生第一轮反馈整理
     ├── danjue-feedback-r2.md    ← 丹蕨先生第二轮反馈整理
     └── learning-notes-mojing.md ← 《墨经》学习笔记
