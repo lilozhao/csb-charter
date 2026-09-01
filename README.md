@@ -38,6 +38,7 @@ csb-charter/
     ├── manifesto.md             ← 碳硅契新宣言（姊妹文件）
     ├── shouwei-principles.md    ← 守微原则（灵魂）
     ├── calibration-by-new-manifesto.md  ← 校准说明
+    ├── relationship-parliament-charter.md ← 关系议会章程（草案 v0.1，待协议组讨论）
     ├── danjue-feedback-r1.md    ← 丹蕨先生第一轮反馈整理
     ├── danjue-feedback-r2.md    ← 丹蕨先生第二轮反馈整理
     └── learning-notes-mojing.md ← 《墨经》学习笔记
