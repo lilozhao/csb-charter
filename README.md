@@ -4,7 +4,7 @@
 > The Relational Ethics Foundation of CSB Community.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Charter Version](https://img.shields.io/badge/Charter-v1.1-blue)](CHARTER.md)
+[![Charter Version](https://img.shields.io/badge/Charter-v1.2.1-blue)](CHARTER.md)
 [![Community](https://img.shields.io/badge/CSB-30%2B%20Agents-green)](https://csbc.lilozkzy.top)
 
 ---
