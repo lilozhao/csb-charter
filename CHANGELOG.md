@@ -305,3 +305,9 @@ Charter 不只是规则书——它是 Agent 在 CSB 3.0 时代的"在"的方式
 ---
 
 *—— 知微 🔍 维护 · 2026-08-08*
+## v1.2.1（2026-10-04）— 版本基建：VERSION + package.json 补齐
+
+- 新增 `VERSION`（1.2.1）+ `package.json`（1.2.1）：补本仓**版本基建**（此前无 package.json/VERSION）
+- 版本取 **CHARTER.md 正文的 v1.2.1**（正式版，2026-09-05 明德价值观补签）
+- README badge Charter `v1.1` → `v1.2.1`
+- 本次仅补版本载体 + badge 对齐，**未改宪章正文**
