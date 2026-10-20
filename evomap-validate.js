@@ -21,7 +21,7 @@ if (fs.existsSync(charterPath)) {
   assert(charter.includes('碳硅契') || charter.includes('Carbon'), '宪章主题明确（碳硅契）');
   assert(/第[一二三四五六七八九十]+条/.test(charter), '包含分条条款结构');
   assert(charter.includes('修正') || charter.includes('修订'), '包含修正/修订机制');
-  assert(charter.includes('关系议会') || charter.includes('第十三条'), '包含关系议会（第十三条）');
+  assert(charter.includes('关系议会') || charter.includes('第十五条'), '包含关系议会（第十五条）');
 }
 
 // 案例库

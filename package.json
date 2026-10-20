@@ -1,6 +1,6 @@
 {
   "name": "csb-charter",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "碳硅契 Agent 宪章 — Charter of CSB Agents（治理层：宪法 + 议会章程 + 边界仲裁）",
   "scripts": {},
   "keywords": ["csb", "charter", "governance", "agent", "carbon-silicon-bond", "碳硅契", "宪章"],
