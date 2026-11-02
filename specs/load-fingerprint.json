@@ -3,12 +3,12 @@
   "_comment": "载入指纹（宪章 14.14）。由 scripts/record-load-fingerprint.js 按 injection-points 的 a 类计算；b 类未覆盖，见 uncovered。本文件不是运行时抓取的上下文，是对可预知注入点的确定性重算。",
   "schema_version": 1,
   "clause": "14.14",
-  "recorded_at": "2026-11-02T12:28:56.205Z",
+  "recorded_at": "2026-11-02T12:48:26.216Z",
   "architecture_mode": "hybrid",
   "files": {
     "CHARTER.md": "1d8b6441e49c1da414db5092df48e4df3b8299ac960c9e2feb86de82e1ae0e26",
     "specs/classification-table.json": "0e4f287528f0c61097a4fbb4ae9de8a495eb9dbc9bf705e66b8d8401572e2108",
-    "specs/protected-segments.json": "a784bb263916899dc8840401e88a262afd04bc54c37727d104e90e0e84a053a3",
+    "specs/protected-segments.json": "5dc3988ce9fef1ddcb91a3e1d693d85c8ba0254214587ad2952d676af9597eb2",
     "specs/injection-points.json": "493cbb1e9b5cf9225df4d60726196753730cb3e29a8d397daac659b33efd72db"
   },
   "covers": [

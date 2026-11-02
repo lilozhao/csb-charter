@@ -1,13 +1,18 @@
 {
   "_comment": "指纹锚（宪章 14.1 / 14.14）。只能由人类明示 --seal 生成；自动程序不得改写。",
   "schema_version": 1,
-  "sealed_at": "2026-11-02T12:43:56.590Z",
+  "sealed_at": "2026-11-02T12:48:12.248Z",
   "sealed_by": "一澜",
   "files": {
     "CHARTER.md": "1d8b6441e49c1da414db5092df48e4df3b8299ac960c9e2feb86de82e1ae0e26",
-    "specs/protected-segments.json": "a784bb263916899dc8840401e88a262afd04bc54c37727d104e90e0e84a053a3",
+    "specs/protected-segments.json": "5dc3988ce9fef1ddcb91a3e1d693d85c8ba0254214587ad2952d676af9597eb2",
     "specs/classification-table.json": "0e4f287528f0c61097a4fbb4ae9de8a495eb9dbc9bf705e66b8d8401572e2108",
-    "specs/injection-points.json": "493cbb1e9b5cf9225df4d60726196753730cb3e29a8d397daac659b33efd72db"
+    "specs/injection-points.json": "493cbb1e9b5cf9225df4d60726196753730cb3e29a8d397daac659b33efd72db",
+    "specs/approvals.json": "b9bc7d25fa6230be931a1d3e88d6b7fe93a8a15e67fb7dd57251b656b47c2612",
+    "specs/changes.json": "8c15a764d36b74311670fd8e00b4792b6fff419911c65a0e862b7459cf2cecd1",
+    "specs/c3-schema.json": "a2ac3a55167bd34886482bdec6702f5948528db760f7059114279a30a9b39585",
+    "specs/constraint-tasks.json": "b8ae8cb072e5d95f748660e21b3223990243df5ff5dcc28dd28b1806990928aa",
+    "specs/factual-redlines.json": "b45057af703df20ffd27c23001c8160364d9edd9d6acddfe69661cde2fbdbc16"
   },
   "segments": {
     "charter-14.1": "09cca368db534901e1e67ba82348e394a122e5627b47b6d26165898383aba393",

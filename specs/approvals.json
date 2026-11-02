@@ -28,7 +28,18 @@
       "when": "2026-11-02T20:43:00+08:00",
       "diff": "新增 scripts/charter-lint.js(13 项) · write-gate.js · record-load-fingerprint.js · specs/*.json(10 份) · specs/anchors.json(4 文件/15 段)",
       "evidence": "宿主人类在会话中明示「现在跑 seal」→ 执行 node scripts/charter-lint.js --seal --human 一澜 → 13/13 PASS (exit 0)",
-      "note": "本条原为 pending，因宿主人类就锚定一事作出明示确认而转入批准；确认对象是「以当前内容作为受保护基准」，不等于对 P2-2/P2-3 的预先批准"
+      "note": "本条原为 pending。宿主人类于一澜 2026-11-02 20:43 明示「现在跑 seal」而转入批准；确认对象是「以当前内容作为受保护基准」，不等于对 P2-2/P2-3 的预先批准。"
+    },
+    {
+      "id": "apr-2026-11-02-coverage",
+      "class": "C2",
+      "subject": "证据文件纳入保护覆盖（5 份锁 + 4 份明示不锁并说明残余风险）",
+      "who": "一澜",
+      "approver_type": "host_human",
+      "when": "2026-11-02T20:46:00+08:00",
+      "diff": "protected-segments.json v1→v2：新增 segments approvals/changes/c3-schema/constraint-tasks/factual-redlines（5 份整文件哈希）+ 新增 unprotected 段（c3-states / verification-ledger / load-fingerprint / anchors，各自 give why_not_hashed + real_control + residual_risk）+ 新增 coverage_rule",
+      "evidence": "宿主人类「要补，补吧」明示 → 重锚 anchors.json → charter-lint 13/13 PASS（exit 0）",
+      "note": "其中 c3-states / verification-ledger / load-fingerprint 若整文件锁定会产生假作废（P1-4 教训）；anchors.json 是根信任，结构上不可自锁，改为外发哈希"
     }
   ],
   "pending": [

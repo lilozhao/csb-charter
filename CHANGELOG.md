@@ -40,10 +40,44 @@ charter-lint 13 项：✅ 13 · ❌ 0 · ⏸️ 0（覆盖率 100%，exit 0）
 
 恢复后重新 PASS（exit 0）。—— 指纹机制不是装饰，它真的能定位到段。
 
-### 已知缺口
+### 已知缺口（v1.0.0 已修）
 
-`specs/` 下 7 份 C2 数据文件（approvals / changes / c3-states / c3-schema / constraint-tasks / factual-redlines / verification-ledger）**尚未登记进 protected-segments**。
-按 14.3(c)「证据链可被合法伪造」，它们应当被保护；现状是改它们不会触发 FAIL。此事需宿主人类确认后补登并重锚（重锚属 C2 变更）。
+~~`specs/` 下 7 份 C2 数据文件尚未登记进 protected-segments~~
+→ **已于 2026-11-02 20:46 经一澜明示补登**（见下节）。
+
+### 保护覆盖（v1.1.0 · 2026-11-02 补登）
+
+12 份 `specs/*.json` 全部有归属，且**每一份都说明了为什么锁 / 为什么不锁**：
+
+| 文件 | 处理 | 理由 |
+|---|---|---|
+| classification-table · injection-points · protected-segments | 🔒 锁 | 分类凭据，本身就是判据 |
+| approvals · changes | 🔒 锁 | 证据记录。能改它 = 能伪造授权 / 补假证据 |
+| c3-schema | 🔒 锁 | 能改它 = 删字段后把 version 往前写 |
+| constraint-tasks | 🔒 锁 | 能改它 = 把 lint 自己从清单里摘掉 |
+| factual-redlines | 🔒 锁 | 能改它 = 把真约束改成「已消解」 |
+| **c3-states** | ⚪ 不锁 | C3b 记忆正常会被追加。锁 = 每次正常写入都假红（P1-4 同一教训） |
+| **verification-ledger** | ⚪ 不锁 | 每次运行都更新。锁 = 跑完必然 FAIL |
+| **load-fingerprint** | ⚪ 不锁 | 每次录制都更新 recorded_at |
+| **anchors.json** | ⚪ 不锁 | **它就是根信任**。文件含自己哈希在结构上不可能 |
+
+新增 `coverage_rule` 与对应 lint 检查：`specs/` 下出现**未归属**的新 JSON → UNDECIDED（“要么锁，要么写明不锁的理由”）。堵住「新增一份证据文件当暗门」。
+
+### 真口子：三条，已如实登记
+
+| 文件 | 残余风险 | 真正的控制 |
+|---|---|---|
+| verification-ledger | ⚠️ **把 last_success_at 往后改，就能掩盖「核验停了」** | 需外发锚（ledger 哈希进 git 提交 / 论坛） |
+| load-fingerprint | 同时篡改 CHARTER.md + anchors.json 时 14.14 仍绿 | 同上，根在 anchors |
+| **anchors.json** | **最高：改受保护文件 + 重算锚，本仓自检全绿而无人察觉** | **git 提交历史 + 把 anchors.json 的 sha256 外发** |
+
+最后一条是本机制的天花板，不说清楚就是假绿。
+当前锚的指纹（可拿去钉在提交信息/论坛）：
+
+```
+anchors.json sha256 = 1caf015d38438cd04e14efb03416e9ae7296061b82165c5ff9bc328c6e888a3a
+sealed_at = 2026-11-02T12:48:12.248Z · by 一澜 · 9 文件 / 15 段
+```
 
 ### 批准记录
 

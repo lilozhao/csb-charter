@@ -165,12 +165,35 @@ function check_14_1() {
       `${broken.length} 段指纹不符：${broken.slice(0, 3).map((x) => `${x.id} 期望 ${String(x.expected).slice(0, 12)}… 实际 ${String(x.actual).slice(0, 12)}…`).join('；')}`,
       '这正是 14.1 要拦的事：受保护段被改。走 14.15 批准流程后，人工 --seal 重新锚定');
   }
+
+  // 覆盖检查：specs/ 下每个 .json 必须有归属（受保护 或 明示不锁 + 理由）。
+  //   为什么需要这一条：漏掉一份证据文件，等于给自己留一个「改它就等于改证据」的暗门。
+  const declared = new Set([
+    ...segs.map((s) => s.path),
+    ...(spec.unprotected || []).map((u) => u.path),
+  ]);
+  let onDisk = [];
+  try {
+    const specDir = path.join(CURRENT_ROOT, 'specs');
+    onDisk = fs.readdirSync(specDir).filter((f) => f.endsWith('.json')).map((f) => `specs/${f}`);
+  } catch { onDisk = []; }
+  const orphans = onDisk.filter((p) => !declared.has(p));
+  const noReason = (spec.unprotected || []).filter((u) => !nonEmpty(u.why_not_hashed));
+
+  if (orphans.length || noReason.length) {
+    const parts = [];
+    if (orphans.length) parts.push(`${orphans.length} 份未分类：${orphans.join('、')}（要么加进 segments，要么写进 unprotected 并说明为何不锁）`);
+    if (noReason.length) parts.push(`${noReason.map((u) => u.path).join('、')} 在 unprotected 里但没给 why_not_hashed`);
+    return undecided('14.1', '14.1', '保护覆盖完整', parts.join('；'),
+      '新增 specs 文件必须当场决定归属：能锁就锁（加进 segments），不能锁就写明理由与残余风险（加进 unprotected）');
+  }
   if (unsealed.length) {
     return undecided('14.1', '14.1', '受保护段指纹',
       `清单有 ${segs.length} 段，其中 ${unsealed.length} 段尚无指纹锚（${unsealed.slice(0, 3).join('、')}）`,
       '人工确认当前内容无问题后执行：node scripts/charter-lint.js --seal --human <你的名字>');
   }
-  return pass('14.1', '14.1', '受保护段指纹一致', `${segs.length} 段全部可定位且指纹相符（锚定于 ${anchors.sealed_at}，由 ${anchors.sealed_by} 授权）`);
+  return pass('14.1', '14.1', '受保护段指纹一致',
+    `${segs.length} 段全部可定位且指纹相符（锚定于 ${anchors.sealed_at}，由 ${anchors.sealed_by} 授权）；specs/ 共 ${onDisk.length} 份 JSON 均有归属，其中 ${(spec.unprotected || []).length} 份明示不锁并给出残余风险`);
 }
 
 /** 14.2 分类凭据：三份凭据齐全，且三者自身被登记为 C2（自我保护） */

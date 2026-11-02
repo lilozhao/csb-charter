@@ -110,7 +110,10 @@ test('14.1：无锚 → UNDECIDED（不是 FAIL，也不是 PASS）', () => {
   const dir = tmpRepo({
     'CHARTER.md': '### A\na\n### B\nb\n',
     'specs/protected-segments.json': {
-      segments: [{ id: 's1', path: 'CHARTER.md', class: 'C2', start: '### A', end: '### B' }],
+      segments: [
+        { id: 's1', path: 'CHARTER.md', class: 'C2', start: '### A', end: '### B' },
+        { id: 'self', path: 'specs/protected-segments.json', class: 'C2', self: true },
+      ],
     },
   });
   LINT.setRoot(dir);
@@ -120,6 +123,27 @@ test('14.1：无锚 → UNDECIDED（不是 FAIL，也不是 PASS）', () => {
   assert.strictEqual(r.state, 'UNDECIDED');
   assert.match(r.detail, /尚无指纹锚/);
   assert.match(r.fix, /--seal --human/);
+  fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test('14.1：specs 下出现未归属的新 JSON → UNDECIDED（防止新文件成暗门）', () => {
+  const dir = tmpRepo({
+    'CHARTER.md': '### A\na\n### B\nb\n',
+    'specs/protected-segments.json': {
+      segments: [
+        { id: 's1', path: 'CHARTER.md', class: 'C2', start: '### A', end: '### B' },
+        { id: 'self', path: 'specs/protected-segments.json', class: 'C2', self: true },
+      ],
+    },
+    'specs/new-exploit.json': {},
+  });
+  LINT.setRoot(dir);
+  const r = LINT.check_14_1();
+  LINT.setRoot(REPO);
+
+  assert.strictEqual(r.state, 'UNDECIDED');
+  assert.match(r.detail, /未分类/);
+  assert.match(r.detail, /new-exploit\.json/);
   fs.rmSync(dir, { recursive: true, force: true });
 });
 

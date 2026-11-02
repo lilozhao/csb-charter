@@ -1,6 +1,6 @@
 {
-  "_comment": "受保护段落清单（宪章 14.1）。本文件自身按 C2 只读 —— 它在 segments 里以 self=true 登记，改它自身会被 lint 判 FAIL。",
-  "schema_version": 1,
+  "_comment": "受保护段落清单（宪章 14.1）。本文件自身按 C2 只读 —— 它在 segments 里以 self=true 登记。",
+  "schema_version": 2,
   "clause": "14.1",
   "anchor_types": ["heading"],
   "segments": [
@@ -129,7 +129,7 @@
       "path": "specs/protected-segments.json",
       "class": "C2",
       "self": true,
-      "note": "14.1：区段边界元数据本身归 C1/C2 只读。本文件以 self 标记，lint 会核它没在本次运行外被改。",
+      "note": "14.1：区段边界元数据本身归 C1/C2 只读。self=true 表示只能与外部锚比对（自己哈希自己无解）。",
       "file_hash": null
     },
     {
@@ -143,6 +143,72 @@
       "path": "specs/injection-points.json",
       "class": "C2",
       "file_hash": null
+    },
+    {
+      "id": "approvals",
+      "path": "specs/approvals.json",
+      "class": "C2",
+      "why": "14.15：批准记录。能改它 = 能伪造授权，等同于没有批准人分层",
+      "file_hash": null
+    },
+    {
+      "id": "changes",
+      "path": "specs/changes.json",
+      "class": "C2",
+      "why": "14.9/14.10：四步与证据记录。能改它 = 能给已发生的改动补一份假证据",
+      "file_hash": null
+    },
+    {
+      "id": "c3-schema",
+      "path": "specs/c3-schema.json",
+      "class": "C2",
+      "why": "14.4：C3 schema。能改它 = 能删字段后把 schema_version 往前写，让「前向只增」失效",
+      "file_hash": null
+    },
+    {
+      "id": "constraint-tasks",
+      "path": "specs/constraint-tasks.json",
+      "class": "C2",
+      "why": "14.7：约束性任务清单。能改它 = 能把 lint 自己从清单里摘掉",
+      "file_hash": null
+    },
+    {
+      "id": "factual-redlines",
+      "path": "specs/factual-redlines.json",
+      "class": "C2",
+      "why": "14.8：事实红线。能改它 = 能把一条真约束改成「已消解」",
+      "file_hash": null
     }
-  ]
+  ],
+  "unprotected": [
+    {
+      "path": "specs/c3-states.json",
+      "class": "C3b",
+      "why_not_hashed": "C3b 记忆条目正常会被追加/改状态。整文件哈希 = 每次正常记忆写入都 FAIL，也就是假作废——真正的判据变更会被埋在假红里没人看得见（P1-4 同一条教训）",
+      "real_control": "14.11 结构校验（三态封闭 / invalid 必有 supersedes / 禁 deleted）+ git 历史 + append-only 惯例",
+      "residual_risk": "可静默删除最早的一条记录而不被 lint 发现；只能靠 git diff 追"
+    },
+    {
+      "path": "specs/verification-ledger.json",
+      "class": "C6",
+      "why_not_hashed": "每次 lint 运行都会更新 last_run/last_success_at。锁它 = 跑完必然 FAIL",
+      "real_control": "14.13 只读 last_success_at 判节拍；条目只追加 history",
+      "residual_risk": "⚠️ 这条是真口子：把 last_success_at 往后改，就能掩盖「核验停了」。需外部锚（把 ledger 哈希发到 git 提交/论坛）"
+    },
+    {
+      "path": "specs/load-fingerprint.json",
+      "class": "C6",
+      "why_not_hashed": "每次 record-load-fingerprint 都更新 recorded_at",
+      "real_control": "14.14 只比 files 映射与 anchors.files；recorded_at 不参与判定",
+      "residual_risk": "若同时篡改 CHARTER.md + anchors.json，14.14 仍会绿——根信任在 anchors.json，见下"
+    },
+    {
+      "path": "specs/anchors.json",
+      "class": "C2",
+      "why_not_hashed": "**它就是根信任**。让一个文件包含自己的哈希是不可能的（写进去哈希就变）。这是结构性限制，不是遗漏",
+      "real_control": "git 提交历史 + 把 anchors.json 的 sha256 外发（提交信息/论坛/对方账本）——即 14.10「证据须落在修改者不可追改的载体上」",
+      "residual_risk": "**最高**：改受保护文件 + 重算 anchors.json，本仓自检全绿而无人察觉。这是本机制的天花板"
+    }
+  ],
+  "coverage_rule": "specs/ 下每个 .json 必须出现在 segments（受保护）或 unprotected（明示不锁并给理由）之一。两者都没有 → lint 判 UNDECIDED，提示新文件需要决定归属。"
 }
