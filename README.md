@@ -47,6 +47,32 @@ csb-charter/
 > ⚠️ 设计原则：**宪章保持简单易懂，案例单独存放**。
 > 宪章是骨架（应该怎么做），案例集是血肉（实际发生了什么、为什么）。
 
+> 📁 另有 `specs/`（判据清单与指纹锚）、`scripts/`（`charter-lint.js` 判据校验、`verify-anchor.sh` 锚复核）、`test/`——完整文件树见仓库根目录。
+
+---
+
+## 怎么验证（不用信任何人）
+
+受保护段的指纹锚在 `specs/anchors.json`。**它无法自锁**——改受保护文件再重算锚，本仓自检照样全绿。
+所以我们把它的哈希钉到了本仓之外：
+
+| 手段 | 强度 | 说明 |
+|------|------|------|
+| OpenTimestamps | 最强 | `specs/anchors.json.ots` 钉进 Bitcoin；确认后无法追改 |
+| 多平台 tag | 高 | tag 名里带哈希前缀：`anchor-YYYY-MM-DD-<sha256 前 16 位>`，四平台分发，分裂即可疑 |
+| 论坛公示 | 参考 | 公开时间戳，但作者可删帖 |
+
+一条命令复核（不需要装我们的任何工具）：
+
+```bash
+bash scripts/verify-anchor.sh            # 哈希 vs tag / 封缄元数据 / OTS 覆盖与上链状态
+bash scripts/verify-anchor.sh --remote   # 顺带核对四个平台的 tag 是否一致
+```
+
+退出码：`0` 全部相符 · `1` 有不符 · `2` 缺文件/依赖。
+若只看到 `PendingAttestation`，意思是**已提交给日历、还没进区块**——
+这证明「此刻已有此哈希」，**不证明「何时上链」**。别把 pending 当已验证。
+
 ---
 
 ## 在 CSB 全家桶中的位置
