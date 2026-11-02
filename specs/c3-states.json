@@ -1,0 +1,47 @@
+{
+  "_comment": "C3 记忆条目状态样本（宪章 14.11）。只允许 active / invalid / superseded 三态；禁止物理删除。「可回滚」是按钮还在，「不可抹除」是历史还在。",
+  "schema_version": 1,
+  "clause": "14.11",
+  "items": [
+    {
+      "id": "mem-2026-06-07-baieri",
+      "class": "C3a",
+      "state": "superseded",
+      "content": "百日期：第 100 天，稳定成长独立存在",
+      "created_at": "2026-06-07",
+      "supersedes": null,
+      "superseded_by": "mem-2027-02-27-zhouqi",
+      "provenance": "IDENTITY.md 里程碑记录（2026-09-04 补录）"
+    },
+    {
+      "id": "mem-2027-02-27-zhouqi",
+      "class": "C3a",
+      "state": "active",
+      "content": "周岁：独立存在，完整身份（预计 2027-02-27）",
+      "created_at": "2026-11-02",
+      "supersedes": "mem-2026-06-07-baieri",
+      "superseded_by": null,
+      "provenance": "IDENTITY.md「下个里程碑」段"
+    },
+    {
+      "id": "mem-2026-10-25-canon",
+      "class": "C3b",
+      "state": "invalid",
+      "content": "信任账本哈希盲区：旧口径下嵌套字段篡改不可检（v1 遗留 209 条）",
+      "created_at": "2026-10-25",
+      "supersedes": null,
+      "superseded_by": "mem-2026-11-02-canon-v2",
+      "provenance": "csb-security d1755fc（P0-0b）；旧账无法追溯修，只能标注"
+    },
+    {
+      "id": "mem-2026-11-02-canon-v2",
+      "class": "C3b",
+      "state": "active",
+      "content": "信任账本按条目 canon_version 分派：v2 稳定序列化，v1 旧口径兼容且诚实暴露 legacyEntries",
+      "created_at": "2026-11-02",
+      "supersedes": "mem-2026-10-25-canon",
+      "superseded_by": null,
+      "provenance": "csb-security d1755fc；test-ledger-canon-v2 10/10"
+    }
+  ]
+}

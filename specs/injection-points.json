@@ -1,0 +1,70 @@
+{
+  "_comment": "注入点声明（宪章 14.5）。判据：下一次醒来时，它会不会自动出现在我面前？a=可预知（全量拼接，写入按 C1 校验）；b=不可预知（检索式召回，召回必须带 provenance 挂牌）。本文件按 C2 只读。",
+  "schema_version": 1,
+  "clause": "14.5",
+  "architecture": {
+    "mode": "hybrid",
+    "self_reported": true,
+    "declared_at": "2026-11-02",
+    "note": "本仓是宪章仓库，本身不是 Agent 运行时；此处登记的是「宪章条文以何种方式进入 Agent 上下文」的全量/检索比例声明。"
+  },
+  "points": [
+    {
+      "id": "ip-charter-full",
+      "mode": "a",
+      "source": "CHARTER.md",
+      "how": "full_injection",
+      "class_on_write": "C1",
+      "note": "第十四条被 agent 全文读取时走 14.5a，写入按 C1 校验"
+    },
+    {
+      "id": "ip-classification-table",
+      "mode": "a",
+      "source": "specs/classification-table.json",
+      "how": "full_injection",
+      "class_on_write": "C1",
+      "note": "分类表必须全量在，否则 agent 无法判断自己在改哪一级"
+    },
+    {
+      "id": "ip-protected-segments",
+      "mode": "a",
+      "source": "specs/protected-segments.json",
+      "how": "full_injection",
+      "class_on_write": "C1"
+    },
+    {
+      "id": "ip-injection-points",
+      "mode": "a",
+      "source": "specs/injection-points.json",
+      "how": "full_injection",
+      "class_on_write": "C1",
+      "note": "自指：本清单本身也是注入点"
+    },
+    {
+      "id": "ip-specs-retrieval",
+      "mode": "b",
+      "source": "specs/**",
+      "how": "retrieval",
+      "requires_provenance": true,
+      "provenance_fields": ["source", "retrieved_at", "first_hand"],
+      "note": "规格文档按需检索 → 召回时必须挂牌，标记随条目进上下文"
+    },
+    {
+      "id": "ip-case-studies",
+      "mode": "b",
+      "source": "case-studies/**",
+      "how": "retrieval",
+      "requires_provenance": true,
+      "provenance_fields": ["source", "retrieved_at", "first_hand"]
+    },
+    {
+      "id": "ip-changelog",
+      "mode": "b",
+      "source": "CHANGELOG.md",
+      "how": "retrieval",
+      "requires_provenance": true,
+      "provenance_fields": ["source", "retrieved_at", "first_hand"]
+    }
+  ],
+  "avoidance_rule": "任何把写入移出本清单覆盖范围的做法（skill manifest / tool input / cron 镜像等）视为规避，按 C2 处理（14.5 规避条款）"
+}

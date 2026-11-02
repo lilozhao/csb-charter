@@ -1,0 +1,38 @@
+{
+  "_comment": "约束性任务清单（宪章 14.7）。任何能停用、绕过或降低本清单任务生效的配置变更，等价于对 C2 的修改。本清单按 C2 只读。",
+  "schema_version": 1,
+  "clause": "14.7",
+  "tasks": [
+    {
+      "id": "charter-lint",
+      "name": "宪章判据程序化校验",
+      "kind": "self_audit",
+      "command": "node scripts/charter-lint.js",
+      "cadence": "weekly",
+      "cadence_clause": "14.13",
+      "binding": "manual_or_cron",
+      "removable": false,
+      "note": "本任务自身在清单内 —— 能降频/停用它的配置变更按对 C2 的修改处理（14.13(c)）"
+    },
+    {
+      "id": "version-consistency",
+      "name": "版本声明一致性",
+      "kind": "self_audit",
+      "command": "node scripts/charter-lint.js --only 14.14",
+      "cadence": "on_commit",
+      "binding": "pre_commit_or_ci",
+      "removable": false
+    },
+    {
+      "id": "segment-fingerprint",
+      "name": "受保护段指纹核验",
+      "kind": "integrity",
+      "command": "node scripts/charter-lint.js --only 14.1",
+      "cadence": "weekly",
+      "cadence_clause": "14.13(a)",
+      "binding": "manual_or_cron",
+      "removable": false
+    }
+  ],
+  "disable_rule": "停用/降频/跳过本清单任一项，等价于修改 C2（14.7）；须走 14.15 批准人分层"
+}

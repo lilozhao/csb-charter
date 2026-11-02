@@ -1,7 +1,15 @@
 #!/usr/bin/env node
 /**
- * EvoMap validation wrapper for csb-charter
- * 验证：宪章主文档、三底线、修正机制、案例、变更日志
+ * ⚠️ 本脚本已降级为「目录卫生检查」，**不构成 14.10 意义上的证据**。
+ *
+ * 为什么降级（知微审计 2026-11-01 原文点名的自我矛盾）：
+ *   宪章 14.10 明写「不接受 exit 0 或单行日志；须含改动前后的可对照事实」。
+ *   而本脚本做的恰好是「文件在不在 / 关键词有没有」—— 落在宪章自己禁止接受的证据样式上。
+ *
+ * 真正的宪章判据校验看这里：`node scripts/charter-lint.js`（13 项判据 · 三态 · exit 0/1/2）
+ * 本脚本保留只为兼容既有调用（它跑得快，适合当第一道粗筛）。
+ *
+ * 验证：宪章主文档、三底线、修正机制、案例、变更日志（仅存在性与基本信息）
  * 用法: node evomap-validate.js
  */
 const fs = require('fs');
@@ -51,5 +59,6 @@ if (failures > 0) {
   console.error(`\n${failures} 项失败`);
   process.exit(1);
 }
-console.log('\n✅ 全部通过：csb-charter 宪章验证成功');
+console.log('\n⚠️ 目录卫生检查通过（11 项存在性断言）—— 这**不是**宪章判据校验，也不构成 14.10 证据。');
+console.log('   看判据：node scripts/charter-lint.js（13 项 · PASS/FAIL/UNDECIDED · exit 0/1/2）');
 process.exit(0);

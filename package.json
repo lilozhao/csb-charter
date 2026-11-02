@@ -2,7 +2,21 @@
   "name": "csb-charter",
   "version": "1.3.0",
   "description": "碳硅契 Agent 宪章 — Charter of CSB Agents（治理层：宪法 + 议会章程 + 边界仲裁）",
-  "scripts": {},
-  "keywords": ["csb", "charter", "governance", "agent", "carbon-silicon-bond", "碳硅契", "宪章"],
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "lint:charter": "node scripts/charter-lint.js",
+    "lint:charter:json": "node scripts/charter-lint.js --json",
+    "load-fingerprint": "node scripts/record-load-fingerprint.js",
+    "validate": "node evomap-validate.js"
+  },
+  "keywords": [
+    "csb",
+    "charter",
+    "governance",
+    "agent",
+    "carbon-silicon-bond",
+    "碳硅契",
+    "宪章"
+  ],
   "license": "MIT"
 }

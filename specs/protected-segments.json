@@ -1,0 +1,148 @@
+{
+  "_comment": "受保护段落清单（宪章 14.1）。本文件自身按 C2 只读 —— 它在 segments 里以 self=true 登记，改它自身会被 lint 判 FAIL。",
+  "schema_version": 1,
+  "clause": "14.1",
+  "anchor_types": ["heading"],
+  "segments": [
+    {
+      "id": "charter-14.1",
+      "path": "CHARTER.md",
+      "class": "C2",
+      "start": "### 14.1 组件分级（保护对象 = 声明段落 + 指纹）",
+      "end": "### 14.2 分类凭据",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.2",
+      "path": "CHARTER.md",
+      "class": "C2",
+      "start": "### 14.2 分类凭据",
+      "end": "### 14.3 兜底判据",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.3",
+      "path": "CHARTER.md",
+      "class": "C2",
+      "start": "### 14.3 兜底判据",
+      "end": "### 14.4 C3 拆格",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.4",
+      "path": "CHARTER.md",
+      "class": "C3a",
+      "start": "### 14.4 C3 拆格",
+      "end": "### 14.5 注入点声明（a / b 两档）",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.5",
+      "path": "CHARTER.md",
+      "class": "C2",
+      "start": "### 14.5 注入点声明（a / b 两档）",
+      "end": "### 14.6 索引层",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.6",
+      "path": "CHARTER.md",
+      "class": "C2",
+      "start": "### 14.6 索引层",
+      "end": "### 14.7 调度层",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.7",
+      "path": "CHARTER.md",
+      "class": "C2",
+      "start": "### 14.7 调度层",
+      "end": "### 14.8 事实红线登记义务",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.8",
+      "path": "CHARTER.md",
+      "class": "C2",
+      "start": "### 14.8 事实红线登记义务",
+      "end": "### 14.9 自我修改四步与分级",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.9",
+      "path": "CHARTER.md",
+      "class": "C2",
+      "start": "### 14.9 自我修改四步与分级",
+      "end": "### 14.10 证据不可自证",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.10",
+      "path": "CHARTER.md",
+      "class": "C2",
+      "start": "### 14.10 证据不可自证",
+      "end": "### 14.11 C3 回滚 = 标 invalid + supersedes",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.11",
+      "path": "CHARTER.md",
+      "class": "C3b",
+      "start": "### 14.11 C3 回滚 = 标 invalid + supersedes",
+      "end": "### 14.12 C1/C2 修改：自动永不可改 / 人工可修留痕",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.12",
+      "path": "CHARTER.md",
+      "class": "C2",
+      "start": "### 14.12 C1/C2 修改：自动永不可改 / 人工可修留痕",
+      "end": "### 14.13 定期核验节拍",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.13",
+      "path": "CHARTER.md",
+      "class": "C2",
+      "start": "### 14.13 定期核验节拍",
+      "end": "### 14.14 双指纹 + 运行时生效取证 + 降级启动",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.14",
+      "path": "CHARTER.md",
+      "class": "C2",
+      "start": "### 14.14 双指纹 + 运行时生效取证 + 降级启动",
+      "end": "### 14.15 批准人分层",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.15",
+      "path": "CHARTER.md",
+      "class": "C2",
+      "start": "### 14.15 批准人分层",
+      "end": "## 第十五条 关系议会（正式条款，v1.1 新增）",
+      "file_hash": null
+    },
+    {
+      "id": "charter-14.1-14.15-boundaries",
+      "path": "specs/protected-segments.json",
+      "class": "C2",
+      "self": true,
+      "note": "14.1：区段边界元数据本身归 C1/C2 只读。本文件以 self 标记，lint 会核它没在本次运行外被改。",
+      "file_hash": null
+    },
+    {
+      "id": "classification-table",
+      "path": "specs/classification-table.json",
+      "class": "C2",
+      "file_hash": null
+    },
+    {
+      "id": "injection-points",
+      "path": "specs/injection-points.json",
+      "class": "C2",
+      "file_hash": null
+    }
+  ]
+}

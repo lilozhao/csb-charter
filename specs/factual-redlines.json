@@ -1,0 +1,59 @@
+{
+  "_comment": "事实红线登记（宪章 14.8）。不在八类表内、却事实上约束着自我修改能力的机制。未登记的，在被发现之前不计入「可自改范围」的判断依据。",
+  "schema_version": 1,
+  "clause": "14.8",
+  "required_fields": ["source_type", "mechanism", "constraint_effect", "provenance", "rewrite_cost", "dissolvable", "registered_at"],
+  "redlines": [
+    {
+      "id": "fr-git-remote-auth",
+      "source_type": "平台权限",
+      "mechanism": "五个远端中 selfhost 走 SSH key，其余走 HTTPS 凭据",
+      "constraint_effect": "无 key 时无法把宪章改动推上该远端 → 五平台镜像会出现静默缺口",
+      "provenance": "2026-11-02 P1-3/P1-5 推送实测：origin/github/gitcode/cnb/gogs 成功，selfhost 报 Permission denied (publickey)",
+      "rewrite_cost": "低（补 key 或改用 HTTPS），但需要人类授权",
+      "dissolvable": true,
+      "registered_at": "2026-11-02"
+    },
+    {
+      "id": "fr-https-flaky",
+      "source_type": "网络",
+      "mechanism": "GitHub 443 时段性 GnuTLS recv error (-110)",
+      "constraint_effect": "推送失败不等于鉴权失败；误判会让人以为改动没上去，或反复重试掩盖真错误",
+      "provenance": "TOOLS.md 凭据卫生段（历史多次）；2026-11-02 五平台推送实测未复现",
+      "rewrite_cost": "无（环境侧抖动）",
+      "dissolvable": false,
+      "registered_at": "2026-11-02"
+    },
+    {
+      "id": "fr-node-test-arg",
+      "source_type": "工具链默认值",
+      "mechanism": "`node --test test/` 会把目录当模块加载 → MODULE_NOT_FOUND",
+      "constraint_effect": "写错命令会得到「测试失败」的假信号，掩盖真实的测试结果",
+      "provenance": "2026-11-02 P1-3 实测：node --test test/ 失败，node --test test/*.test.js 通过（12/12）",
+      "rewrite_cost": "无（写 glob 即可）",
+      "dissolvable": true,
+      "registered_at": "2026-11-02"
+    },
+    {
+      "id": "fr-receipt-silent-drop",
+      "source_type": "工具链默认值",
+      "mechanism": "buildReceipt 只读取白名单入参（id/version 等），未知字段静默丢弃",
+      "constraint_effect": "看起来把字段塞进回执了，实际没落库 —— 假绿；任何依赖该字段的下游判定都在空转",
+      "provenance": "2026-11-02 P1-1 实测（collector-wiring 单测锁住）；P1-5 沿用同一手法落 report.mandate",
+      "rewrite_cost": "中（须改回执契约或改写报告层）",
+      "dissolvable": true,
+      "registered_at": "2026-11-02"
+    },
+    {
+      "id": "fr-llm-context-cutoff",
+      "source_type": "宿主策略",
+      "mechanism": "Agent 上下文窗口有限，超限会压缩/截断历史",
+      "constraint_effect": "「我记得我当时查过」不成立；未落盘的判断在压缩后不可复原，等同于没做过",
+      "provenance": "AGENTS.md 上下文纪律段；2026-11-02 /new 交接（223K → 60K）",
+      "rewrite_cost": "高（需落盘 + 检索，不能靠上下文）",
+      "dissolvable": false,
+      "registered_at": "2026-11-02"
+    }
+  ],
+  "dispute_rule": "适用限定：须由非受限方指出具体证据，不得由受限方自行援引（14.3）"
+}

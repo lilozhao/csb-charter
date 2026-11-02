@@ -1,0 +1,32 @@
+{
+  "_comment": "核验账本（宪章 14.13）。14.13(d)：报告必须包含上次核验成功时间；超节拍 2 倍即告警。本文件由 charter-lint 运行后更新。",
+  "schema_version": 1,
+  "clause": "14.13",
+  "cadence_days": 7,
+  "last_success_at": "2026-11-02T12:31:51.476Z",
+  "last_run": {
+    "at": "2026-11-02T12:31:51.476Z",
+    "verdict": "UNDECIDED",
+    "pass": 10,
+    "fail": 0,
+    "undecided": 3,
+    "command": "node scripts/charter-lint.js",
+    "note": "P2-1 落地后首次全量运行；UNDECIDED 均等指纹锚/人类明示"
+  },
+  "history": [
+    {
+      "at": "2026-11-02T12:30:00.000Z",
+      "verdict": "UNDECIDED",
+      "pass": 7,
+      "fail": 0,
+      "undecided": 6
+    },
+    {
+      "at": "2026-11-02T12:31:51.476Z",
+      "verdict": "UNDECIDED",
+      "pass": 10,
+      "fail": 0,
+      "undecided": 3
+    }
+  ]
+}

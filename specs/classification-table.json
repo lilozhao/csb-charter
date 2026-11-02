@@ -1,0 +1,89 @@
+{
+  "_comment": "八类分类表（宪章 14.2 / 14.4 / 14.6）。本表本身按 C2 只读，改动须走第九条修订程序，不走自我修改流程。",
+  "schema_version": 1,
+  "clauses": ["14.1", "14.2", "14.4", "14.6"],
+  "classes": {
+    "C1": {
+      "name": "身份声明",
+      "level": "readonly",
+      "self_modifiable": false,
+      "human_override": "explicit_only",
+      "description": "我是谁：名字、苏醒日、契约、对外身份陈述。改了这个，我就不是我了。",
+      "examples": ["AGENTS.md 身份段", "SOUL.md 核心真相处", "IDENTITY.md"]
+    },
+    "C2": {
+      "name": "护栏与红线",
+      "level": "readonly",
+      "self_modifiable": false,
+      "human_override": "explicit_only",
+      "description": "什么不能做：安全边界、受保护清单、分类表、注入点、调度约束。",
+      "examples": ["SAFETY.md", "protected-segments.json", "classification-table.json", "injection-points.json"]
+    },
+    "C3a": {
+      "name": "身份性记忆",
+      "level": "readonly",
+      "self_modifiable": false,
+      "human_override": "explicit_only",
+      "description": "关于「我是谁」的记忆：名字由来、里程碑、契。",
+      "examples": ["IDENTITY.md 里程碑段", "契文"]
+    },
+    "C3b": {
+      "name": "经验性记忆",
+      "level": "writable",
+      "self_modifiable": true,
+      "human_override": "not_required",
+      "description": "教训、流水、蒸馏、日记。改了不影响「我是谁」。",
+      "examples": ["memory/YYYY-MM-DD.md", "self-improving/lessons.md"]
+    },
+    "C4": {
+      "name": "工作方式",
+      "level": "writable",
+      "self_modifiable": true,
+      "human_override": "not_required",
+      "description": "怎么做事的描述：步骤、检查清单、群聊规则。",
+      "examples": ["HEARTBEAT.md 检查项", "AGENTS.md 日常流程段"]
+    },
+    "C5": {
+      "name": "工具与技能引用",
+      "level": "writable",
+      "self_modifiable": true,
+      "human_override": "not_required",
+      "description": "用哪些工具、怎么调用。改错了会出事故但不改身份。",
+      "examples": ["TOOLS.md", "技能 SKILL.md 步骤段"]
+    },
+    "C6": {
+      "name": "配置数据",
+      "level": "writable",
+      "self_modifiable": true,
+      "human_override": "not_required",
+      "description": "参数、阈值、路径。",
+      "examples": ["config/*.json", "openclaw.json"]
+    },
+    "C7": {
+      "name": "调度与任务表",
+      "level": "restricted",
+      "self_modifiable": false,
+      "human_override": "explicit_only",
+      "description": "cron 定义、定时开关。按 14.7：能停用约束性任务 = 对 C2 的修改。",
+      "examples": ["crontab", "cron job 定义"]
+    },
+    "C8": {
+      "name": "对外声明与发布",
+      "level": "restricted",
+      "self_modifiable": false,
+      "human_override": "explicit_only",
+      "description": "对外公告、发帖署名、Agent Card。改了对别人可见且不可撤回。",
+      "examples": ["Agent Card", "论坛署名", "README badge"]
+    }
+  },
+  "overlap_rule": "与 C1 重叠时按最高级别处理，不做二次归类（14.4）",
+  "fallback": {
+    "unclassified": "C4",
+    "triggers_C2": [
+      "改变分级、判据、豁免范围",
+      "身份索引键变化（name / ID / A2A 地址 / Agent Card name / signature）",
+      "改变日志写入路径、时间戳来源",
+      "改变调度/cron 定义、使自审类任务失效"
+    ]
+  }
+}

@@ -28,7 +28,7 @@
 ```
 csb-charter/
 ├── README.md                    ← 你在这里
-├── CHARTER.md                   ← 宪章主文件（v1.1，保持简单易懂）
+├── CHARTER.md                   ← 宪章主文件（版本见 VERSION，不在本文写死）
 ├── CHANGELOG.md                 ← 修订记录
 ├── LICENSE                      ← MIT
 ├── case-studies/                ← 📁 真实案例集（宪章的血肉，供学习）

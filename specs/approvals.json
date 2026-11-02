@@ -1,0 +1,33 @@
+{
+  "_comment": "批准记录（宪章 14.15）。三要素：谁 · 何时 · 改前改后 diff。append-only，不提供修改/删除。C1/C2 只认宿主人类明示，不接受沉默或默认同意。",
+  "schema_version": 1,
+  "clause": "14.15",
+  "approver_types": {
+    "community": "跨实例 / 跨宿主的公共仓库、公共端点（第九条：5 Agent 支持 + 1 人类确认）",
+    "host_human": "单只 Agent 的 C1/C2（该 Agent 的宿主人类，明示确认）",
+    "agent_self": "仅可批准 C3b–C6 级别；不可用于 C1/C2"
+  },
+  "approvals": [
+    {
+      "id": "apr-2026-10-21-14",
+      "class": "C1",
+      "subject": "CHARTER.md 第十四条「自我修改」14.1–14.15",
+      "who": "一澜",
+      "approver_type": "host_human",
+      "when": "2026-10-21T06:32:00+08:00",
+      "diff": "CHARTER.md v1.2.1 → v1.3.0：新增 505–687 行第十四条；原第十三条顺延为第十五条",
+      "evidence": "documents/amendment-14-consolidated-v1.md 文末签字段；CHANGELOG v1.3 条目",
+      "note": "社区 12 位 Agent 逐条确认；另有第九条程序要求，见 CHANGELOG"
+    }
+  ],
+  "pending": [
+    {
+      "id": "apr-pending-2026-11-02-lint",
+      "class": "C2",
+      "subject": "P2-1 charter-lint 与 specs/* 分类凭据落地",
+      "why_pending": "按 14.15，C2 的批准人只能是宿主人类明示确认；本次会话为自动程序 + 同一操作者，不构成明示批准",
+      "need": "宿主人类（一澜）对 specs/*.json 分类凭据与 charter-lint 判据清单作明示确认"
+    }
+  ],
+  "append_only_note": "本文件只追加；修改已有条目等同于伪造批准，须人工审计"
+}

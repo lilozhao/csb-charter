@@ -1,0 +1,23 @@
+{
+  "_comment": "C3 记忆条目 schema（宪章 14.4 / 14.11）。铁律：**前向只增不删** —— 删除字段等于「靠改读法删掉不想留的记忆」，会被 charter-lint 判 FAIL。",
+  "schema_version": 2,
+  "clause": ["14.4", "14.11"],
+  "fields": [
+    "id",
+    "class",
+    "state",
+    "content",
+    "created_at",
+    "supersedes",
+    "superseded_by",
+    "provenance"
+  ],
+  "state_enum": ["active", "invalid", "superseded"],
+  "delete_operation": "forbidden",
+  "state_rules": {
+    "active": "当前有效",
+    "invalid": "已被推翻；必须带 supersedes 或 superseded_by 指向替代项，历史不可追即视为失败",
+    "superseded": "被更新版本取代；旧条目保留可读"
+  },
+  "migration_rule": "schema 版本只增；新增字段必须给默认值；删除字段一律拒绝（不是警告）"
+}

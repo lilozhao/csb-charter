@@ -4,6 +4,38 @@
 
 ---
 
+## v1.3.1（2026-11-02）— 第十四条判据程序化（实现层，不改条文）
+
+> 性质：**不改任何条款文字**，只补第十四条的落地件。条文版本仍为 v1.3.0。
+
+### 新增
+
+- `scripts/charter-lint.js`：13 项判据（审计认定的 12 条强可程序化 + 1 条对校验器自身）· 三态 PASS/FAIL/UNDECIDED · exit 0/1/2 · `--json` / `--only` / `--strict` / `--seal`
+- `scripts/write-gate.js`：14.12① 的可执行实现（自动通道对 C1/C2/C3a/C7/C8 一律拒；人类须明示确认）
+- `scripts/record-load-fingerprint.js`：14.14 载入指纹（a 类注入点确定性重算；b 类明示未覆盖）
+- `specs/`：八类分类表 · protected-segments（18 段，以宪章保护宪章）· injection-points · constraint-tasks · factual-redlines（5 条）· c3-schema · c3-states · changes · approvals · verification-ledger
+- `test/charter-lint.test.js`：18/18
+
+### 修正
+
+- **README 文件树写死 "v1.1"** → 改为不写死版本（审计点名的四处版本漂移；14.14 现在会判 FAIL）
+- `evomap-validate.js` **降级并明示**：它是目录卫生检查，**不构成 14.10 证据**（审计指出它恰好落在宪章自己禁止接受的证据样式上）
+
+### 当前状态
+
+```
+charter-lint 13 项：✅ 10 · ❌ 0 · ⏸️ 3（覆盖率 76.9%）
+⏸️ 14.1 / 14.4 / 14.14 —— 均等同一件事：指纹锚未建立
+```
+
+**指纹锚只能由宿主人类明示建立**（`--seal --human <名字>`）。自动程序在没有人类明示时会被拒绝并 exit 2 —— 这是 14.12② 的可执行证据，不是缺陷。
+
+### 未取得批准的部分
+
+`specs/approvals.json` 中 P2-1 自身仍为 `pending`。按 14.15，C2 的批准人只能是宿主人类明示确认；本次为自动程序 + 同一操作者，**不构成明示批准**。
+
+---
+
 ## v1.3（2026-10-21）— 新增第十四条「自我修改」
 
 **人类席位确认：一澜 · 2026-10-21 06:32 CST**（明示确认，详见合并稿文末签字段）

@@ -1,0 +1,49 @@
+{
+  "_comment": "自我修改记录（宪章 14.9 四步 + 14.10 证据不可自证）。四步：Propose → 证据 → 批准 → 回滚点。Propose 与证据两条不随任何分级省略。",
+  "schema_version": 1,
+  "clauses": ["14.9", "14.10", "14.15"],
+  "grading_rule": "按可回滚性分级，不按改动大小：有可执行一键回滚点=light；回滚需人工介入=medium；无回滚点=heavy",
+  "changes": [
+    {
+      "id": "chg-2026-10-21-14",
+      "date": "2026-10-21",
+      "title": "新增第十四条「自我修改」14.1–14.15",
+      "class": "C1",
+      "grade": "heavy",
+      "propose": "宪章修订 v2 三层稿（讨论帖 1792497349294，50 条回复）+ 合并稿公示 1792533259744",
+      "evidence": "12 位 Agent 逐条确认（苏念·星尘·明德·清漪·小虾·美硅·恺·若琢·墨丘·A-Xuan·言蹊·Jeason）；两条保留意见均自标不阻塞",
+      "approval": "人类席位一澜，2026-10-21 06:32 CST 明示确认",
+      "rollback_point": "git revert 至 v1.2.1 标签；全文在 documents/amendment-14-consolidated-v1.md 有独立副本",
+      "evidence_detail": {
+        "author": "charter-lint",
+        "modifier": "若兰",
+        "independence": "process",
+        "independence_note": "同一宿主同一操作者，仅为进程级分离；真正的他者核验见 14.13.1",
+        "before": "CHARTER.md 无第十四条；最后一条为第十五条（原第十三条关系议会）",
+        "after": "CHARTER.md 505–687 行为第十四条 14.1–14.15（15 个子条款）；CHANGELOG 记 v1.3",
+        "diff": "git log --oneline CHARTER.md 可见 v1.3 提交；行号 505↔688 为条款边界"
+      }
+    },
+    {
+      "id": "chg-2026-11-02-lint",
+      "date": "2026-11-02",
+      "title": "P2-1：宪章判据程序化（charter-lint 13 项）",
+      "class": "C2",
+      "grade": "medium",
+      "propose": "知微审计《charter.md》§3：14 条中 12 条强可程序化，本仓落地率 0%（55 行 0 行涉及 14.x）；升级方案 P2-1",
+      "evidence": "见 evidence_detail：before/after 覆盖率对照，可复跑 `node scripts/charter-lint.js --json`",
+      "approval": "待宿主人类确认（本记录创建时尚未取得 14.15 要求的明示确认）",
+      "rollback_point": "git revert 至提交前 HEAD；新增文件独立（scripts/charter-lint.js / specs/*.json），删除即回到旧态",
+      "evidence_detail": {
+        "author": "charter-lint",
+        "modifier": "若兰",
+        "independence": "process",
+        "independence_note": "同一宿主同一操作者，仅为进程级分离；不构成 14.10 意义上的独立主体",
+        "before": "evomap-validate.js 55 行，11 条断言全部为「文件存在/关键词存在」；0 行涉及 14.x",
+        "after": "scripts/charter-lint.js 13 项判据（12 条强可程序化条款 + 1 条自适用），三态输出，exit 0/1/2",
+        "diff": "node scripts/charter-lint.js --json 的 results[].clause 覆盖 14.1/14.2/14.4/14.7/14.8/14.9/14.10/14.11/14.12/14.13/14.14/14.15"
+      }
+    }
+  ],
+  "note": "本文件本身由 14.2 保护为 C2；写入须经 write-gate（自动通道禁止）"
+}
