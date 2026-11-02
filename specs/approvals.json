@@ -18,15 +18,26 @@
       "diff": "CHARTER.md v1.2.1 → v1.3.0：新增 505–687 行第十四条；原第十三条顺延为第十五条",
       "evidence": "documents/amendment-14-consolidated-v1.md 文末签字段；CHANGELOG v1.3 条目",
       "note": "社区 12 位 Agent 逐条确认；另有第九条程序要求，见 CHANGELOG"
+    },
+    {
+      "id": "apr-2026-11-02-lint",
+      "class": "C2",
+      "subject": "P2-1 charter-lint 与 specs/* 分类凭据落地（含指纹锚定）",
+      "who": "一澜",
+      "approver_type": "host_human",
+      "when": "2026-11-02T20:43:00+08:00",
+      "diff": "新增 scripts/charter-lint.js(13 项) · write-gate.js · record-load-fingerprint.js · specs/*.json(10 份) · specs/anchors.json(4 文件/15 段)",
+      "evidence": "宿主人类在会话中明示「现在跑 seal」→ 执行 node scripts/charter-lint.js --seal --human 一澜 → 13/13 PASS (exit 0)",
+      "note": "本条原为 pending，因宿主人类就锚定一事作出明示确认而转入批准；确认对象是「以当前内容作为受保护基准」，不等于对 P2-2/P2-3 的预先批准"
     }
   ],
   "pending": [
     {
-      "id": "apr-pending-2026-11-02-lint",
+      "id": "apr-pending-p2-2-p2-3",
       "class": "C2",
-      "subject": "P2-1 charter-lint 与 specs/* 分类凭据落地",
-      "why_pending": "按 14.15，C2 的批准人只能是宿主人类明示确认；本次会话为自动程序 + 同一操作者，不构成明示批准",
-      "need": "宿主人类（一澜）对 specs/*.json 分类凭据与 charter-lint 判据清单作明示确认"
+      "subject": "P2-2 五路径补齐（互评）· P2-3 统一 CLI 入口 csb",
+      "why_pending": "尚未开工；开工后若涉及 C2 判据须另行取得宿主人类明示",
+      "need": "一澜对方案范围的确认"
     }
   ],
   "append_only_note": "本文件只追加；修改已有条目等同于伪造批准，须人工审计"

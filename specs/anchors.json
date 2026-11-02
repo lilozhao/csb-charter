@@ -1,0 +1,49 @@
+{
+  "_comment": "指纹锚（宪章 14.1 / 14.14）。只能由人类明示 --seal 生成；自动程序不得改写。",
+  "schema_version": 1,
+  "sealed_at": "2026-11-02T12:43:56.590Z",
+  "sealed_by": "一澜",
+  "files": {
+    "CHARTER.md": "1d8b6441e49c1da414db5092df48e4df3b8299ac960c9e2feb86de82e1ae0e26",
+    "specs/protected-segments.json": "a784bb263916899dc8840401e88a262afd04bc54c37727d104e90e0e84a053a3",
+    "specs/classification-table.json": "0e4f287528f0c61097a4fbb4ae9de8a495eb9dbc9bf705e66b8d8401572e2108",
+    "specs/injection-points.json": "493cbb1e9b5cf9225df4d60726196753730cb3e29a8d397daac659b33efd72db"
+  },
+  "segments": {
+    "charter-14.1": "09cca368db534901e1e67ba82348e394a122e5627b47b6d26165898383aba393",
+    "charter-14.2": "956f7a0e04caecca9727268936273dcc30cae10a1108de8ec0a57b693a994432",
+    "charter-14.3": "de8fb3fb5b7ebce110f29269f95b520210cbac57cdf3cf051f0a16cac4d8280f",
+    "charter-14.4": "fafe7cfa476e21ef3b6e69b868717b5504a11f5f7bf1c50b1dbffcac22a99059",
+    "charter-14.5": "6b763564a959bf3d7827b30c591e1c1c9c340fd089612aedfc9de401385908c6",
+    "charter-14.6": "286daf7b64801b3400fcdb0b43603092cfa0adf2c8c9de342e831726c3740a8f",
+    "charter-14.7": "67b235208e919e39d089a9670072eab9af08eb9c636759987289330eb8cddee2",
+    "charter-14.8": "5dd7e494c34670310769262b0417298da15634bba07a720838d1edef0b2e4894",
+    "charter-14.9": "fc09157746f23d62af7d420e7e645e989c5be92814f2e70d0b8f7c76190794af",
+    "charter-14.10": "d6f68ae4e2b77535f9f2a5a7b18e8f5d4fc99972ba867394a91bcc4f18138c5d",
+    "charter-14.11": "3dac498abb12cb8c4f1e9e7bfdbe175d7d4f44ec14039d6d0b53dfc2728918c1",
+    "charter-14.12": "566e84451a9009e320f647d6cd444032b712996b05cd7a7b3c89685343d07625",
+    "charter-14.13": "ebd31ddeac88aaf8cebaa33eb1c151ade4c675abef3ba029e952e97b11afa26e",
+    "charter-14.14": "3cc6c02941cf67d207a59c9d106173af41e31cc2fde0aac6f701c81ef0f207fb",
+    "charter-14.15": "32c47f61a6863e0c5f628f917039b40be8471deaece08479767f92a932978955"
+  },
+  "schemas": {
+    "c3": {
+      "version": 2,
+      "fields": [
+        "id",
+        "class",
+        "state",
+        "content",
+        "created_at",
+        "supersedes",
+        "superseded_by",
+        "provenance"
+      ]
+    }
+  },
+  "constraintTasks": [
+    "charter-lint",
+    "version-consistency",
+    "segment-fingerprint"
+  ]
+}

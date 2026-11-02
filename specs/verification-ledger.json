@@ -3,15 +3,15 @@
   "schema_version": 1,
   "clause": "14.13",
   "cadence_days": 7,
-  "last_success_at": "2026-11-02T12:31:51.476Z",
+  "last_success_at": "2026-11-02T12:44:33.204Z",
   "last_run": {
-    "at": "2026-11-02T12:31:51.476Z",
-    "verdict": "UNDECIDED",
-    "pass": 10,
+    "at": "2026-11-02T12:44:33.204Z",
+    "verdict": "PASS",
+    "pass": 13,
     "fail": 0,
-    "undecided": 3,
+    "undecided": 0,
     "command": "node scripts/charter-lint.js",
-    "note": "P2-1 落地后首次全量运行；UNDECIDED 均等指纹锚/人类明示"
+    "note": "一澜 --seal 授权后首次全绿（13/13）"
   },
   "history": [
     {
@@ -27,6 +27,13 @@
       "pass": 10,
       "fail": 0,
       "undecided": 3
+    },
+    {
+      "at": "2026-11-02T12:44:33.204Z",
+      "verdict": "PASS",
+      "pass": 13,
+      "fail": 0,
+      "undecided": 0
     }
   ]
 }
